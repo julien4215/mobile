@@ -38,3 +38,7 @@ doc/api/
 
 # FVM Version Cache
 .fvm/
+
+# Compiled SVGs
+
+*.vec

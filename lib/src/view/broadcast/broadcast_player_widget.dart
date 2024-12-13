@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lichess_mobile/src/network/http.dart';
 import 'package:lichess_mobile/src/styles/styles.dart';
-import 'package:lichess_mobile/src/utils/lichess_assets.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class BroadcastPlayerWidget extends ConsumerWidget {
   const BroadcastPlayerWidget({
@@ -25,10 +24,9 @@ class BroadcastPlayerWidget extends ConsumerWidget {
     return Row(
       children: [
         if (federation != null) ...[
-          SvgPicture.network(
-            lichessFideFedSrc(federation!),
+          SvgPicture(
+            AssetBytesLoader('assets/images/fide-fed/$federation.svg.vec'),
             height: 12,
-            httpClient: ref.read(defaultClientProvider),
           ),
           const SizedBox(width: 5),
         ],

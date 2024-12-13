@@ -76,6 +76,7 @@ dependencies:
   stream_transform: ^2.1.0
   timeago: ^3.6.0
   url_launcher: ^6.1.9
+  vector_graphics: ^1.1.15
   visibility_detector: ^0.4.0
   wakelock_plus: ^1.1.1
   web_socket_channel: ^3.0.0
@@ -106,6 +107,7 @@ flutter:
     - assets/chess_openings.db
     - assets/images/
     - assets/images/stockfish/
+    - assets/images/fide-fed/
     - assets/sounds/futuristic/
     - assets/sounds/lisp/
     - assets/sounds/nes/

@@ -8,16 +8,16 @@
 import fontforge
 import os
 
-input_directory = "../lila/public/images/puzzle-themes"
-output_font_file = "assets/fonts/PuzzleIcons.ttf"
+input_directory = "../lila/public/images/fide-fed"
+output_font_file = "assets/fonts/FederationIcons.ttf"
 
 
 font = fontforge.font()
 
 # Set font properties (adjust as needed)
-font.fontname = "Puzzle Icons"
-font.fullname = "Puzzle Theme Icons"
-font.familyname = "LichessPuzzleIcons"
+font.fontname = "Federation Icons"
+font.fullname = "FIDE Federation Icons"
+font.familyname = "LichessFederationIcons"
 
 # unicode private area start index
 unicode_code_point = 0xE000
@@ -42,11 +42,11 @@ font.generate(output_font_file)
 
 font.close()
 
-dart_output_file = "lib/src/styles/puzzle_icons.dart"
+dart_output_file = "lib/src/styles/federation_icons.dart"
 
 # Dart code template for the icon data
 icon_data_template = """\
-static const IconData {icon_name} = IconData(0x{unicode_code_point}, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+'{icon_name}' : IconData(0x{unicode_code_point}, fontFamily: _kFontFam, fontPackage: _kFontPkg),
 """
 
 unicode_code_point = 0xE000
@@ -69,14 +69,12 @@ for filename in os.listdir(input_directory):
 dart_code = f"""\
 import 'package:flutter/widgets.dart';
 
-class PuzzleIcons {{
-  PuzzleIcons._();
+const _kFontFam = 'LichessFederationIcons';
+const String? _kFontPkg = null;
 
-  static const _kFontFam = 'LichessPuzzleIcons';
-  static const String? _kFontPkg = null;
-
+const federationIcons = {{
 {"".join(dart_code_list)}
-}}
+}};
 """
 
 with open(dart_output_file, "w") as output_file:

@@ -150,15 +150,17 @@ class BroadcastAnalysisController extends _$BroadcastAnalysisController
       clocks: _getClocks(currentPath),
     );
 
-    // We need to define the state value in the build method because `sendEvalGetEvent` and
-    // `debouncedStartEngineEval` require the state to have a value.
+    // We need to define the state value in the build method because `requestEval` require the
+    // state to have a value.
     state = AsyncData(broadcastState);
 
     if (state.requireValue.isEngineAvailable(evaluationPrefs)) {
-      requestEval();
+      socketClient.firstConnection.timeout(const Duration(seconds: 1)).then((_) {
+        requestEval();
+      });
     }
 
-    return broadcastState;
+    return state.requireValue;
   }
 
   Future<void> _reloadPgn() async {

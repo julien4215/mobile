@@ -83,7 +83,17 @@ class StudyController extends _$StudyController
     _socketSubscription?.cancel();
     _socketSubscription = _socketClient.stream.listen(_handleSocketEvent);
 
-    return chapter;
+    // We need to define the state value in the build method because `requestEval` require the
+    // state to have a value.
+    state = AsyncData(chapter);
+
+    if (state.requireValue.isEngineAvailable(evaluationPrefs)) {
+      socketClient.firstConnection.timeout(const Duration(seconds: 1)).then((_) {
+        requestEval();
+      });
+    }
+
+    return state.requireValue;
   }
 
   @override

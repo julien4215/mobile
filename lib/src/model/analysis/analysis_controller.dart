@@ -234,17 +234,17 @@ class AnalysisController extends _$AnalysisController
       division: division,
     );
 
-    // We need to define the state value in the build method because `requestEval` require the state
-    // to have a value.
+    // We need to define the state value in the build method because `requestEval` require the
+    // state to have a value.
     state = AsyncData(analysisState);
 
     if (state.requireValue.isEngineAvailable(evaluationPrefs)) {
-      socketClient.firstConnection.timeout(const Duration(seconds: 1)).whenComplete(() {
+      socketClient.firstConnection.timeout(const Duration(seconds: 1)).then((_) {
         requestEval();
       });
     }
 
-    return analysisState;
+    return state.requireValue;
   }
 
   @override
